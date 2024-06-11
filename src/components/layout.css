@@ -1,0 +1,13 @@
+@import "../App.css";
+
+.header {
+  font-family: "Montserrat Bold", sans-serif;
+  background-color: #282c34;
+  min-height: 1vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 1em;
+  color: white;
+}
