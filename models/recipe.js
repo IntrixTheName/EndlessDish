@@ -1,8 +1,8 @@
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const recipe_schema = new mongoose.Schema({
-  name: String,
+  title: String,
   desc: String,
   tags: [String],
   doc: String

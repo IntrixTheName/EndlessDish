@@ -38,6 +38,7 @@ h5,
 h6 {
   font-family: "Montserrat Bold", sans-serif;
   color: var(--primary1);
+  margin: 1ch;
 }
 
 h1 {

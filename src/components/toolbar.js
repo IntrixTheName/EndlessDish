@@ -1,5 +1,5 @@
 //Inspiration for this toolbar taken from ChatGPT exerpt, and modified for use here
-import { Outlet, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import React from "react";
 import "./toolbar.css";
 import EndlessDishLogo from "../assets/logos";
@@ -26,7 +26,7 @@ function Toolbar() {
         <ToolbarItem dest="/notices" text="Notices" id="notices" />
         <ToolbarItem dest="/about" text="About" id="about" />
         <Link to="https://github.com/IntrixTheName/EndlessDish">
-          <img src={GitHubLogo} width="30px" height="30px" />
+          <img src={GitHubLogo} width="auto" height="50px" alt="See GitHub Source" title="See GitHub Source" />
         </Link>
       </ul>
     </nav>

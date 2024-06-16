@@ -1,5 +1,5 @@
-import { Outlet, Link } from "react-router-dom";
-import React, { useState, useEffect } from "react";
+import { Outlet } from "react-router-dom";
+//import React, { useState, useEffect } from "react";
 import Toolbar from "./toolbar";
 import "./layout.css";
 
