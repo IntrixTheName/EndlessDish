@@ -10,7 +10,7 @@ function DownloadButton(props) {
         const a = document.createElement('a')
         const url = window.URL.createObjectURL(file)
         a.href = url
-        a.download = 'Endless Dish Template.dotx'
+        a.download = props.filename
         document.body.appendChild(a)
         a.click(); a.remove();
         window.URL.revokeObjectURL(url)

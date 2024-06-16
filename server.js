@@ -51,7 +51,7 @@ app.get("/get/recipes", async (req, res) => {
 })
 
 app.get("/get/recipes/download/:id", async (req, res) => {
-  res.download(path.join(__dirname, `./library/submitted_recipes/${req.params["id"]}.docx`))
+  res.download(path.join(__dirname, `./library/submitted_recipes/${req.params["id"]}`))
 })
 
 app.get("/get/recipes/template", async (req, res) => {

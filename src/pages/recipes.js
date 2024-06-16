@@ -19,13 +19,13 @@ const Recipes = () => {
       }
     }
     getRecipes()
-  })
+  }, [])
 
   const listItems = recipes.map((x) => (
     <Notice
       title={x.title}
       body={x.desc}
-      extra={<DownloadButton src={`/get/recipes/download/${x.__id}`} text="Download Recipe Card" />}
+      extra={<DownloadButton src={`/get/recipes/download/${x._id}`} text="Download Recipe Card" filename={`${x.title}.docx`} />}
     />
   ))
 

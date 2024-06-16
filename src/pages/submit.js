@@ -69,7 +69,7 @@ const Submit = () => {
         <Notice
           title="Looking to Contribute? Read This"
           body="Endless Dish encourages everyone to share dishes that are important to them! Download the template below, then submit your recipe card with the form here. A project volunteer will finalize it and upload the recipe to the site for the community to enjoy!"
-          extra={<DownloadButton src="/get/recipes/template" text="Download Template" />}
+          extra={<DownloadButton src="/get/recipes/template" text="Download Template" filename="Endless Dish Template.dotx"/>}
         />
       </div>
       <form onSubmit={handleSubmit} style={{ width: "80%" }}>
