@@ -14,8 +14,13 @@ app.use(cors())
 
 
 //Configure database connection & schemas
+/*let MongoClient = require('mongodb').MongoClient
+MongoClient.connect("mongodb://localhost:27017/endless-dish", function(err, db) {
+  if(err) throw err;
+  console.log("Connected to mongo:endless-dish")
+  db.close
+})*/
 mongoose.connect("mongodb://localhost:27017/endless-dish")
-console.log('Connected to Mongo')
 const RecipeModel = require('./models/recipe')
 
 //Configure Multer transactions
@@ -51,13 +56,15 @@ app.get("/get/recipes", async (req, res) => {
 })
 
 app.get("/get/recipes/download/:id", async (req, res) => {
-  res.download(path.join(__dirname, `./library/submitted_recipes/${req.params["id"]}`))
+  res.download(path.join(__dirname, `./library/recipes/${req.params["id"]}`))
 })
 
 app.get("/get/recipes/template", async (req, res) => {
   res.download(path.join(__dirname, "./public/Endless Dish Template.dotx"))
 })
 
+// ! Implement submissions in a later version, not prepared to handle input at this time
+/*
 app.post("/post/recipes/submit-recipe", SubmitRecipe.single("doc"), async (req, res) => {
   try{
     const form_data = req.body
@@ -88,5 +95,6 @@ app.post("/post/recipes/new-recipe", async (req, res) => {
     console.log("Oh Well")
   }
 })
+*/
 
 app.listen(PORT)

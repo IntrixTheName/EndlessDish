@@ -21,7 +21,7 @@ function DownloadButton(props) {
   }
 
   return (
-    <button onClick={handleDownload}>{props.text}</button>
+    <button className="button" onClick={handleDownload} style={{margin: "5px"}}>{props.text}</button>
   )
 }
 

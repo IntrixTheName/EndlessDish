@@ -21,16 +21,19 @@ function Toolbar() {
       </Link>
       <ul className="tab">
         <ToolbarItem dest="/recipes" text="Browse Recipes" id="recipes" />
-        <ToolbarItem dest="/submit" text="Submit" id="submit" />
-        <ToolbarItem dest="/events" text="Events" id="events" />
         <ToolbarItem dest="/notices" text="Notices" id="notices" />
         <ToolbarItem dest="/about" text="About" id="about" />
         <Link to="https://github.com/IntrixTheName/EndlessDish">
-          <img src={GitHubLogo} width="auto" height="50px" alt="See GitHub Source" title="See GitHub Source" />
+          <img src={GitHubLogo} width="auto" height="60px" alt="See GitHub Source" title="See GitHub Source" />
         </Link>
       </ul>
     </nav>
   );
 }
+
+/*
+        <ToolbarItem dest="/submit" text="Submit" id="submit" />
+        <ToolbarItem dest="/events" text="Events" id="events" />
+*/
 
 export default Toolbar;

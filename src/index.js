@@ -8,8 +8,8 @@ import Layout from "./components/layout";
 
 import Home from "./pages/home";
 import Recipes from "./pages/recipes";
-import Submit from "./pages/submit";
-import Events from "./pages/events";
+//import Submit from "./pages/submit";
+//import Events from "./pages/events";
 import Notices from "./pages/notices";
 import About from "./pages/about";
 
@@ -20,8 +20,6 @@ export default function App() {
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
           <Route path="recipes" element={<Recipes />} />
-          <Route path="submit" element={<Submit />} />
-          <Route path="events" element={<Events />} />
           <Route path="notices" element={<Notices />} />
           <Route path="about" element={<About />} />
         </Route>
@@ -29,6 +27,11 @@ export default function App() {
     </BrowserRouter>
   )
 }
+
+/*
+<Route path="submit" element={<Submit />} />
+<Route path="events" element={<Events />} />
+*/
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

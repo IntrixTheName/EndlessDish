@@ -6,7 +6,7 @@ function Notice(props) {
   const toggleCollapse = () => {setIsCollapsed(!isCollapsed)}
 
   return (
-    <div className="notice" onClick={toggleCollapse} style={{cursor: "pointer"}}>
+    <div className="notice" onClick={toggleCollapse}>
       <h3>{props.title} {isCollapsed ? "↓" : "↑"}</h3>
       {!isCollapsed && <p>{props.body}</p>}
       {!isCollapsed && props.extra}
