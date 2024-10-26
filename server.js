@@ -1,10 +1,11 @@
 const express = require("express")
 const bodyParser = require("body-parser")
 const multer = require("multer")
-const mongoose = require("mongoose")
 const path = require('path')
 const cors = require('cors')
 const { exec } = require('child_process')
+
+import {get_recipe} from './src/api/db'
 
 const app = express()
 const PORT = 5000
@@ -13,15 +14,6 @@ app.use(bodyParser.json())
 app.use(cors())
 
 
-//Configure database connection & schemas
-/*let MongoClient = require('mongodb').MongoClient
-MongoClient.connect("mongodb://localhost:27017/endless-dish", function(err, db) {
-  if(err) throw err;
-  console.log("Connected to mongo:endless-dish")
-  db.close
-})*/
-mongoose.connect("mongodb://localhost:27017/endless-dish")
-const RecipeModel = require('./models/recipe')
 
 //Configure Multer transactions
 const Recipe = multer.diskStorage({
@@ -30,16 +22,6 @@ const Recipe = multer.diskStorage({
 })
 const SubmitRecipe = multer({storage: Recipe})
 
-//Utility
-async function query(model, search_for = null) {
-  try {
-    const results = await model.find(search_for)
-    return results
-  } catch (error) {
-    console.log(`Unsuccessful query, model=${model} search_for=${search_for}, ${error}`)
-    return []
-  }
-}
 
 
 // RECIPES --------------------------------------------------------------------

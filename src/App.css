@@ -28,42 +28,17 @@
   src: url('./assets/fonts/Montserrat-Thin.ttf');
 }
 
-/*@font-face {font-family: Montserrat; src: url('https://fonts.googleapis.com/css2?family=Montserrat');}*/
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
+h1,h2,h3,h4,h5,h6 {
   font-family: "Montserrat Bold", sans-serif;
   color: var(--primary1);
   margin: 1ch;
 }
-
-h1 {
-  font-size: 2em;
-}
-
-h2 {
-  font-size: 1.8em;
-}
-
-h3 {
-  font-size: 1.6em;
-}
-
-h4 {
-  font-size: 1.4em;
-}
-
-h5 {
-  font-size: 1.2em;
-}
-
-h6 {
-  font-size: 1em;
-}
+h1 {font-size: 2em;}
+h2 {font-size: 1.8em;}
+h3 {font-size: 1.6em;}
+h4 {font-size: 1.4em;}
+h5 {font-size: 1.2em;}
+h6 {font-size: 1em;}
 
 p {
   font-family: "Montserrat", sans-serif;
@@ -73,30 +48,3 @@ p {
   width: 80%;
   margin: 0 auto;
 }
-
-/*Unused Items (for now, may see use later)-----------------------------------------------------------------------------
-
-.App-link {
-  color: #61dafb;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-*/

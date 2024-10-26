@@ -12,14 +12,14 @@ const Submit = () => {
   }
   const [name, setName] = useState('');
   const [desc, setDesc] = useState('');
-  const [customTags, setCustomTags] = useState('');
-  const [selectedTags, setSelectedTags] = useState([]);
+  //const [customTags, setCustomTags] = useState('');
+  //const [selectedTags, setSelectedTags] = useState([]);
   const [doc, setDoc] = useState(null);
 
-  const handleCheckboxChange = (tag) => {
-    if (selectedTags.includes(tag)) { setSelectedTags(selectedTags.filter((s) => s !== tag)) }
-    else { setSelectedTags(selectedTags.concat([tag])) }
-  }
+  // const handleCheckboxChange = (tag) => {
+  //   if (selectedTags.includes(tag)) { setSelectedTags(selectedTags.filter((s) => s !== tag)) }
+  //   else { setSelectedTags(selectedTags.concat([tag])) }
+  // }
 
   const handleFileChange = (e) => {
     setDoc(e.target.files[0]);
@@ -31,7 +31,7 @@ const Submit = () => {
     const formData = new FormData();
     formData.append('name', name);
     formData.append('desc', desc);
-    formData.append('tags', selectedTags.concat([customTags]));
+    //formData.append('tags', selectedTags.concat([customTags]));
     formData.append('doc', doc);
 
     fetch('/post/recipes/submit-recipe', { method: 'POST', body: formData })
