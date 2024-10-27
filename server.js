@@ -1,48 +1,70 @@
-const express = require("express")
-const bodyParser = require("body-parser")
-const multer = require("multer")
-const path = require('path')
+const { debug_get_user, get_recipe } = require('./src/api/db')
+const Snapshot = require('./src/api/snapshot')
+const express = require('express')
+const { json } = require('body-parser')
+//const multer = require("multer")          
+const { join } = require('path')
 const cors = require('cors')
-const { exec } = require('child_process')
 
-import {get_recipe} from './src/api/db'
+const snaplog = new Snapshot('./log.log')
+//const p_dest = pino.destination('log.log')
+//const logger = pino({level: "debug"}, p_dest)
+snaplog.snap("Initiated server.js")
 
 const app = express()
 const PORT = 5000
 
-app.use(bodyParser.json())
+app.use(json())
 app.use(cors())
 
 
 
 //Configure Multer transactions
-const Recipe = multer.diskStorage({
-  destination: (req, file, cb) => {cb(null, "./library/submitted_recipes/")},
-  filename: (req, file, cb) => {cb(null, "temp")}
+// const Recipe = multer.diskStorage({
+//   destination: (req, file, cb) => {cb(null, "./library/submitted_recipes/")},
+//   filename: (req, file, cb) => {cb(null, "temp")}
+// })
+// const SubmitRecipe = multer({storage: Recipe})
+
+app.get("/debug/test", (req, res) => {
+  res.json({message: "Pinged server.js, successful"})
 })
-const SubmitRecipe = multer({storage: Recipe})
+
+app.get("/debug/user", async (req, res) => {
+  snaplog.snap("Reached /debug/user route")
+  try {
+    debug_get_user().then((Cove) => {
+      snaplog.snap(`Server.js recieved user: ${Cove.username}`)
+      res.json(Cove)
+    })
+  } catch (err) {
+    snaplog.snap(`Error in Debug User route: ${String(err)}`)
+    res.status(500).json({err: `Error in debug/user: ${err}`})
+  }
+})
 
 
 
 // RECIPES --------------------------------------------------------------------
 
+//! Update this function
 app.get("/get/recipes", async (req, res) => {
   try {
     const results = await query(RecipeModel)
     res.json(results)
   } catch (error) {
-    console.error("Error in /get/recipes route:", error)
+    snaplog.snap("Error in /get/recipes route:", error)
     res.status(500).json({err: "Internal Server Error"})
   }
   
 })
 
 app.get("/get/recipes/download/:id", async (req, res) => {
-  res.download(path.join(__dirname, `./library/recipes/${req.params["id"]}`))
+  res.download(join(__dirname, `./library/recipes/${req.params["id"]}`))
 })
 
 app.get("/get/recipes/template", async (req, res) => {
-  res.download(path.join(__dirname, "./public/Endless Dish Template.dotx"))
+  res.download(join(__dirname, "./public/Endless Dish Template.dotx"))
 })
 
 // ! Implement submissions in a later version, not prepared to handle input at this time
@@ -64,7 +86,7 @@ app.post("/post/recipes/submit-recipe", SubmitRecipe.single("doc"), async (req, 
 
     res.status(200).json({message: "Submission accepted", ticket: doc._id})
   } catch(err) {
-    console.error("Error handling form data:", err);
+    logger.error("Error handling form data:", err);
     res.status(500).json({ message: "Internal server error" });
   }
 })
@@ -74,9 +96,10 @@ app.post("/post/recipes/new-recipe", async (req, res) => {
     const formData = req.body
     if (formData == {}) {throw new Error("No form data recieved")}
   } catch {
-    console.log("Oh Well")
+    logger.info("Oh Well")
   }
 })
 */
 
-app.listen(PORT)
+const server = app.listen(PORT, () => {console.log(`Server running on ${PORT}`)})
+server.setTimeout(60000)

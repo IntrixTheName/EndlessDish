@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react"
 import Notice from "../components/notice"
-import { Link } from "react-router-dom"
+//import { Link } from "react-router-dom"
 import DownloadButton from "../components/download_button"
 
 const Recipes = () => {

@@ -1,0 +1,12 @@
+[02:11:51] Initiated server.js
+[02:12:54] Initiated server.js
+[02:13:53] Reached /debug/user route
+[02:13:53] Return of Cove type =
+[02:13:53] [object Object]
+[02:13:53] Server.js recieved user: Cove_Holden
+[02:37:06] Initiated server.js
+[02:37:08] Initiated server.js
+[02:37:18] Reached /debug/user route
+[02:37:18] Server.js recieved user: Cove_Holden
+[02:37:18] Reached /debug/user route
+[02:37:18] Server.js recieved user: Cove_Holden

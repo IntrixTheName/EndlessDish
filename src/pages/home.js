@@ -1,18 +1,31 @@
-import { debug_get_user } from "../api/db"
+//import { debug_get_user } from "../api/db"
+import { useState, useEffect } from "react"
 import Notice from "../components/notice"
-import { Link } from "react-router-dom"
+//import { Link } from "react-router-dom"
 
 const Home = () => {
 
-  const user = async () => {
-    const Cove = await debug_get_user()
-    return (
-      <Notice
-        title={`User: ${Cove._username}`}
-        body={`Email: ${Cove.email}`}
-      />
-    )
-  }
+  const [Cove, setCove] = useState(null)
+  
+  useEffect(() => {
+    const fetchUser = async () => {
+      try{
+        console.log("Fetching Cove user...")
+        const response = await fetch("/debug/user")
+        console.log("Response ok?: ", response.ok)
+        if(!response.ok) throw new Error("Failed to fetch Cove data")
+        const cove = await response.json()
+        console.log("Cove: ", cove)
+        setCove(cove)
+      } catch (err) {
+        console.error("Error in fetching user:", err)
+        setCove({err: "Could not load Cove", username: "---", email: "---"})
+      }
+    }
+    fetchUser();
+  }, []);
+
+
 
   return (
     <div className="home page">
@@ -22,7 +35,10 @@ const Home = () => {
         title="Latest Notice: <None>"
         body="No notices to show. Woohoo!"
       />
-      {user()}
+      <Notice
+        title={`User: ${Cove ? Cove.username : "..."}`}
+        body={`Email: ${Cove ? Cove.email : "..."}`}
+      />
     </div>
   )
 }
