@@ -50,7 +50,7 @@ async function signup(username, pwd) {
         const result = await dbGet("SELECT max(user_id) as max_id FROM users") //Get the current highest user ID
         let new_user_id = (result.max_id !== null) ? result.max_id + 1 : 2; //Start with ID = 2 if no existing users (0 = test, 1 = Brad)
 
-        dbRun("INSERT INTO users VALUES(?, ?, ?)", [new_user_id, username, `${salt}:${pwd_hash}`])
+        dbRun("INSERT INTO users VALUES(?, ?, ?, NULL, 'user')", [new_user_id, username, `${salt}:${pwd_hash}`])
     } catch (err) {
         console.error('Error during user signup:', err)
     } 

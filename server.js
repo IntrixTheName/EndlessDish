@@ -1,15 +1,11 @@
-const { debug_get_user, get_recipe } = require('./src/api/db')
-const Snapshot = require('./src/api/snapshot')
+const { debug_get_user, get_recipe, signup } = require('./src/api/db')
 const express = require('express')
 const { json } = require('body-parser')
 //const multer = require("multer")          
 const { join } = require('path')
 const cors = require('cors')
 
-const snaplog = new Snapshot('./log.log')
-//const p_dest = pino.destination('log.log')
-//const logger = pino({level: "debug"}, p_dest)
-snaplog.snap("Initiated server.js")
+console.log("Initiated server.js")
 
 const app = express()
 const PORT = 5000
@@ -31,16 +27,24 @@ app.get("/debug/test", (req, res) => {
 })
 
 app.get("/debug/user", async (req, res) => {
-  snaplog.snap("Reached /debug/user route")
+  console.log("Reached /debug/user route")
   try {
     debug_get_user().then((Cove) => {
-      snaplog.snap(`Server.js recieved user: ${Cove.username}`)
+      console.log(`Server.js recieved user: ${Cove.username}`)
       res.json(Cove)
     })
   } catch (err) {
-    snaplog.snap(`Error in Debug User route: ${String(err)}`)
+    console.log(`Error in Debug User route: ${String(err)}`)
     res.status(500).json({err: `Error in debug/user: ${err}`})
   }
+})
+
+
+
+// USERS ----------------------------------------------------------------------
+
+app.post("/signup", async (req, res) => {
+  signup(req.body['username'], req.body['password'])
 })
 
 
@@ -53,7 +57,7 @@ app.get("/get/recipes", async (req, res) => {
     const results = await query(RecipeModel)
     res.json(results)
   } catch (error) {
-    snaplog.snap("Error in /get/recipes route:", error)
+    console.log("Error in /get/recipes route:", error)
     res.status(500).json({err: "Internal Server Error"})
   }
   
