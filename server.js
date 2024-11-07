@@ -1,4 +1,4 @@
-const { debug_get_user, get_recipe, signup } = require('./src/api/db')
+const { debug_get_user, get_recipe, get_recipes, signup } = require('./src/api/db')
 const express = require('express')
 const { json } = require('body-parser')
 //const multer = require("multer")          
@@ -54,8 +54,9 @@ app.post("/signup", async (req, res) => {
 //! Update this function
 app.get("/get/recipes", async (req, res) => {
   try {
-    const results = await query(RecipeModel)
-    res.json(results)
+    get_recipes().then((results) => {
+      res.json(results)
+    })
   } catch (error) {
     console.log("Error in /get/recipes route:", error)
     res.status(500).json({err: "Internal Server Error"})

@@ -89,9 +89,15 @@ async function delete_user(username, pwd) {
 
 //Recipe Card Functions --------------------------------------------------------
 
-function submit_recipe(title) {} //TODO - Implement Function
+function submit_recipe(title, summary) {} //TODO - Implement Function
+
+function edit_review(id, field, overwriting_value) {
+    
+}
 
 function review_recipe(id, decision) {} //TODO - Implement Function
+
+function commit_recipe(id, decision) {} //TODO - Implement function
 
 /**
  * Retrieve a recipe from the database
@@ -122,5 +128,6 @@ function delete_recipe() {}  //TODO - Implement Function
 module.exports = {
     debug_get_user,
     signup,
-    get_recipe
+    get_recipe,
+    get_recipes
 }

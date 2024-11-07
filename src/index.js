@@ -12,6 +12,7 @@ import Recipes from "./pages/recipes";
 //import Events from "./pages/events";
 import Notices from "./pages/notices";
 import About from "./pages/about";
+import Admin from "./pages/admin";
 
 export default function App() {
   return (
@@ -20,8 +21,10 @@ export default function App() {
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
           <Route path="recipes" element={<Recipes />} />
+          <Route path="recipes/:id" element={<Recipe />} />
           <Route path="notices" element={<Notices />} />
           <Route path="about" element={<About />} />
+          <Route path="admin" element={<Admin />} />
         </Route>
       </Routes>
     </BrowserRouter>
