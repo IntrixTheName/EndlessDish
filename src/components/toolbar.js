@@ -21,8 +21,10 @@ function Toolbar() {
       </Link>
       <ul className="tab">
         <ToolbarItem dest="/recipes" text="Browse Recipes" id="recipes" />
+        <ToolbarItem dest="/submit" text="Submit Recipe" id="Submit" />
         <ToolbarItem dest="/notices" text="Notices" id="notices" />
         <ToolbarItem dest="/about" text="About" id="about" />
+        <ToolbarItem dest="/admin" text="Admin" id="admin" />
         <Link to="https://github.com/IntrixTheName/EndlessDish">
           <img src={GitHubLogo} width="auto" height="60px" alt="See GitHub Source" title="See GitHub Source" />
         </Link>

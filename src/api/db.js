@@ -1,7 +1,8 @@
 /* db.js --- Database driver for the website */
 
 const { promisify } = require('util');
-const { scryptSync, randomBytes, timingSafeEqual, randomInt } = require('crypto');
+const { scryptSync, randomBytes} = require('crypto'); //, timingSafeEqual, randomInt 
+//const { rejects } = require('assert');
 const sqlite3 = require('sqlite3').verbose();
 
 //Create connection to the database
@@ -66,7 +67,7 @@ async function login_verify(username, pwd) {
     try {
         let record = await dbGet(`SELECT pwd_hash FROM user WHERE username = ${username};`); //Grab record with assoc. username
         const [salt, key] = record.pwd_hash.split(':') //Split it into the salt & hash
-        return (key == scryptSync(pwd, salt, 64).toString('hex')) //Compare, return true if hashes match
+        return (key === scryptSync(pwd, salt, 64).toString('hex')) //Compare, return true if hashes match
     } catch (err) {
         console.error('Error during login:', err)
         return false
@@ -89,15 +90,34 @@ async function delete_user(username, pwd) {
 
 //Recipe Card Functions --------------------------------------------------------
 
-function submit_recipe(title, summary) {} //TODO - Implement Function
-
-function edit_review(id, field, overwriting_value) {
-    
+/**
+ * Submit a recipe card for review
+ * @param {string} title Name of the recipe
+ * @param {string} summary Summary/description/notes of the recipe 
+ * @returns Promise containing ID of the newly created record
+ */
+function submit_recipe(title, summary) {
+    const new_id = "ABCEFGHKLMNPRTVWXYZ".charAt(Math.floor(Math.random() * 19)) + Math.floor(Math.random() * 100).toString().padStart(2, '0')
+    return new Promise((res, rej) => {
+        database.run(
+            `INSERT INTO recipe_review (temp_id, title, summary) VALUES (?, ?, ?)`, [new_id, title, summary],
+            function(err) {
+                if(err) rej(err);
+                else res(new_id)
+            }
+        )
+    })
 }
 
-function review_recipe(id, decision) {} //TODO - Implement Function
-
-function commit_recipe(id, decision) {} //TODO - Implement function
+/**
+ * Update a value of the submission to reflect new information
+ * @param {string} id The ID of the submission to update
+ * @param {string} field 
+ * @param {string} overwriting_value 
+ */
+function edit_submission(id, field, overwriting_value) {
+    dbRun("UPDATE recipe_review SET ? = ? WHERE temp_id = ?", [field, overwriting_value, id])
+}
 
 /**
  * Retrieve a recipe from the database
@@ -118,16 +138,23 @@ async function get_recipes(limit = null) {
     return recipe
 }
 
-function update_recipe() {}  //TODO - Implement Function
+/**
+ * Recieve all submissions from the database
+ * @param {*} limit 
+ * @returns 
+ */
+async function get_submissions(limit = null) {
+    let recipe = await dbAll(`SELECT * FROM recipe_review${limit === null ? "" : ` LIMIT ${limit}`}`)
+    return recipe
+}
 
-function add_recipe_flaire() {} //TODO - Implement Function
-
-function delete_recipe() {}  //TODO - Implement Function
 
 
 module.exports = {
     debug_get_user,
     signup,
     get_recipe,
-    get_recipes
+    get_recipes,
+    get_submissions,
+    submit_recipe
 }
