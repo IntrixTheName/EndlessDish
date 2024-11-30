@@ -7,6 +7,7 @@ import reportWebVitals from './reportWebVitals';
 import Layout from "./components/layout";
 
 import Home from "./pages/home";
+import Login from "./pages/login";
 import Recipes from "./pages/recipes";
 import Submit from "./pages/submit";
 //import Events from "./pages/events";

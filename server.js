@@ -1,4 +1,11 @@
-const { debug_get_user, get_recipe, get_recipes, signup, submit_recipe, get_submissions } = require('./src/api/db')
+const {
+  debug_get_user,
+  get_recipe,
+  get_recipes,
+  signup,
+  login_verify,
+  submit_recipe,
+  get_submissions } = require('./src/api/db')
 const express = require('express')
 const { json } = require('body-parser')
 const multer = require("multer")          
@@ -48,6 +55,10 @@ app.get("/debug/user", async (req, res) => {
 
 app.post("/signup", async (req, res) => {
   signup(req.body['username'], req.body['password'])
+})
+
+app.get("/login", async (req, res) => {
+
 })
 
 

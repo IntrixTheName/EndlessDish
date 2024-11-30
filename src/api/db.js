@@ -153,6 +153,7 @@ async function get_submissions(limit = null) {
 module.exports = {
     debug_get_user,
     signup,
+    login_verify,
     get_recipe,
     get_recipes,
     get_submissions,
